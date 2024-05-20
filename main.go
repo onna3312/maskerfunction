@@ -20,5 +20,5 @@ func changeInputLink(input string) string {
 }
 
 func main() {
-	fmt.Println(changeInputLink("http://nilsoy.com asdad http://nilsoy.com 123123123 http://3"))
+	fmt.Println(changeInputLink("http://nilsoy.com asdad http://nilsoy.com 123123123 http://333344"))
 }

@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func changeInputLink(input string) string {
 	sliceFromString := []byte(input)
@@ -20,5 +24,9 @@ func changeInputLink(input string) string {
 }
 
 func main() {
-	fmt.Println(changeInputLink("http://nilsoy.com asdad http://nilsoy.com 123123123 http://3"))
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Enter URL: ")
+	txt, _ := reader.ReadString('\n')
+	fmt.Println(changeInputLink(txt))
+
 }

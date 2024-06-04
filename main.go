@@ -6,27 +6,36 @@ import (
 	"os"
 )
 
-func changeInputLink(input string) string {
+func maskInputLink(input string) string {
 	sliceFromString := []byte(input)
+	var marker string = "http://"
+	markerSlice := []byte(marker)
+	lengthCounter := 0
 
-	for i := 0; i < len(input); i++ {
-		if input[i] == 'h' && input[i+1] == 't' && input[i+2] == 't' && input[i+3] == 'p' && input[i+4] == ':' && input[i+5] == '/' && input[i+6] == '/' {
-			for x := i + 7; x < len(input); x++ {
-				if sliceFromString[x] == ' ' {
+	for i := 0; i < len(sliceFromString); i++ {
+		if sliceFromString[i] == markerSlice[0] {
+			lengthCounter = 1
+			for j := 1; j < len(markerSlice) && i+j < len(sliceFromString); j++ {
+				if sliceFromString[i+j] != markerSlice[j] {
+					lengthCounter = 0
 					break
 				}
-				sliceFromString[x] = '*'
-
+				lengthCounter++
+			}
+			if lengthCounter == len(markerSlice) {
+				for j := i + len(markerSlice); j < len(sliceFromString) && sliceFromString[j] != ' '; j++ {
+					sliceFromString[j] = '*'
+				}
 			}
 		}
 	}
+
 	return string(sliceFromString)
 }
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter URL: ")
+	fmt.Print("Enter your message: ")
 	txt, _ := reader.ReadString('\n')
-	fmt.Println(changeInputLink(txt))
-
+	fmt.Println(maskInputLink(txt))
 }

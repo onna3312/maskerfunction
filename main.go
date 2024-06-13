@@ -38,5 +38,4 @@ func main() {
 	fmt.Print("Enter your message: ")
 	txt, _ := reader.ReadString('\n')
 	fmt.Println(maskInputLink(txt))
-	//test
 }

@@ -23,7 +23,11 @@ func maskInputLink(input string) string {
 				lengthCounter++
 			}
 			if lengthCounter == len(markerSlice) {
-				for j := i + len(markerSlice); j < len(sliceFromString) && sliceFromString[j] != ' '; j++ {
+				if len(sliceFromString) > 0 && sliceFromString[len(sliceFromString)-1] == '\n' {
+					sliceFromString = sliceFromString[:len(sliceFromString)-1]
+				}
+				for j := i + len(markerSlice); j < len(sliceFromString) && (sliceFromString[j] != ' ' || j == len(sliceFromString)-1); j++ {
+
 					sliceFromString[j] = '*'
 				}
 			}
